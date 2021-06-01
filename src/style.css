@@ -1,0 +1,95 @@
+body {
+  font-family: architects daughter;
+}
+
+h1 {
+  text-align: center;
+  font-size: 50px;
+  font-weight: bolder;
+}
+
+.hide {
+  display: none;
+}
+#city-name {
+  font-size: large;
+  text-align: center;
+  color: -internal-light-dark (black, white);
+  background-color: -internal-light-dark(rgb(239, 239, 239), rgb(59, 59, 59));
+  padding: 1px 6px;
+  border-width: 2px;
+  border-style: outset;
+  border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+  border-image: initial;
+}
+
+#select-city {
+  text-align: right;
+}
+
+#select-city:hover + .hide {
+  display: block;
+  font-size: 15px;
+  color: red;
+}
+
+#current-city {
+  font-size: large;
+  padding: 1px 6px;
+  border-width: 2px;
+  border-style: outset;
+  box-sizing: border-box;
+}
+#current-city:hover {
+  background-color: turquoise;
+}
+.weather-app {
+  border: 1px solid gray;
+  border-radius: 2%;
+  padding: 15px 20px;
+  margin: 15px;
+  max-width: 80%;
+  background-image: url("clouds.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 9px 9px 5px black;
+}
+
+#cityB {
+  padding-right: 40px;
+}
+
+.today {
+  font-weight: bolder;
+}
+
+#temp {
+  font-size: 150px;
+}
+
+#celsius {
+  background-color: lightgray;
+  border: none;
+}
+#fahrenheit {
+  background-color: rgb(113, 157, 194);
+  border: none;
+}
+
+.degree {
+  font-size: 20px;
+  position: relative;
+  top: -60px;
+}
+
+.precipitation {
+  font-size: 40px;
+  position: relative;
+  top: 50px;
+}
+#hourly {
+  font-weight: bolder;
+}
+.weekday {
+  font-weight: bolder;
+}
