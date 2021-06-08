@@ -122,10 +122,4 @@ form.addEventListener("submit", chooseCity);
 let currentCity = document.querySelector("#current-city");
 currentCity.addEventListener("click", getLocation);
 
-let tempFButton = document.querySelector("#fahrenheit");
-tempFButton.addEventListener("click", tempFahrenheit);
-
-let tempCButton = document.querySelector("#celsius");
-tempCButton.addEventListener("click", tempCelsius);
-
 searchCity("Leipzig");

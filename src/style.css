@@ -21,6 +21,7 @@ h1 {
   border-style: outset;
   border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
   border-image: initial;
+  border-radius: 5px;
 }
 
 #select-city {
@@ -39,6 +40,7 @@ h1 {
   border-width: 2px;
   border-style: outset;
   box-sizing: border-box;
+  border-radius: 5px;
 }
 #current-city:hover {
   background-color: turquoise;
@@ -56,34 +58,42 @@ h1 {
 }
 
 #cityB {
-  padding-right: 40px;
+  margin-top: 20px;
+  font-weight: bold;
 }
 
 .today {
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+#description {
+  font-size: 20px;
   font-weight: bolder;
 }
 
 #temp {
-  font-size: 150px;
+  font-size: 140px;
+  margin-left: 5px;
 }
 
-#celsius {
-  background-color: lightgray;
-  border: none;
-}
-#fahrenheit {
-  background-color: rgb(113, 157, 194);
-  border: none;
+#icon {
+  margin-left: 20px;
+  position: relative;
+  top: -50px;
 }
 
 .degree {
-  font-size: 20px;
+  font-size: 30px;
+  font-weight: bolder;
   position: relative;
-  top: -60px;
+  top: -50px;
 }
 
-.precipitation {
-  font-size: 40px;
+.attributes {
+  font-size: 30px;
+  font-weight: bold;
+  list-style: none;
   position: relative;
   top: 50px;
 }
