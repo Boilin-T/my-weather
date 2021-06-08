@@ -1,11 +1,22 @@
 function showWeather(response) {
   console.log(response);
   document.querySelector("#cityB").innerHTML = response.data.name;
+
+  document.querySelector("#description").innerHTML =
+    response.data.weather[0].description;
+
+  document
+    .querySelector("#icon")
+    .setAttribute(
+      "src",
+      `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+
   document.querySelector("#temp").innerHTML = Math.round(
     response.data.main.temp
   );
-  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
 
+  document.querySelector("#humidity").innerHTML = response.data.main.humidity;
   let humidityIcon = document.querySelector("#humidity-icon");
   let newHumidity = response.data.main.humidity;
   if (newHumidity <= 50) {
@@ -18,8 +29,9 @@ function showWeather(response) {
     }
   }
 
-  document.querySelector("#description").innerHTML =
-    response.data.weather[0].description;
+  document.querySelector("#wind").innerHTML = Math.round(
+    response.data.wind.speed
+  );
 }
 
 function formatDate() {
