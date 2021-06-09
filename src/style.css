@@ -99,6 +99,11 @@ h1 {
   top: 50px;
 }
 
+#hourly:hover {
+  background-color: rgb(108, 187, 240);
+  border-radius: 8px;
+}
+
 .hourly-forecast {
   font-size: 20px;
   font-weight: bolder;
@@ -106,13 +111,6 @@ h1 {
 
 .hourly-forecast-icon {
   height: 50px;
-}
-
-#hourly {
-  font-weight: bolder;
-}
-.weekday {
-  font-weight: bolder;
 }
 
 .daily-forecast {
@@ -124,4 +122,19 @@ h1 {
 
 .forecast-line {
   line-height: 35px;
+  margin: 0;
+}
+
+.forecast-line:hover {
+  background-color: rgb(108, 187, 240);
+  border-radius: 8px;
+}
+
+.forecast-day {
+  padding-right: 60px;
+}
+
+.daily-forecast-icon {
+  height: 80px;
+  padding-right: 100px;
 }

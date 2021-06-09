@@ -123,7 +123,7 @@ function displayHourly(response) {
     if (index < 6) {
       hourlyHTML =
         hourlyHTML +
-        `<div class="col-2 text-center">
+        `<div class="col-2 text-center" id="hourly">
       <div class="hourly-temp">${Math.round(hour.temp)} ºC</div>
       <img src="https://openweathermap.org/img/wn/${
         hour.weather[0].icon
@@ -160,11 +160,11 @@ function displayDaily(response) {
             <img src="https://openweathermap.org/img/wn/${
               forecastDay.weather[0].icon
             }@2x.png" alt="" class="daily-forecast-icon">
-                  <span class="forecast-temp-max">${Math.round(
+                  <span class="forecast-temp-min">${Math.round(
                     forecastDay.temp.min
                   )} ºC</span>
             <span>|</span>
-            <span class="forecast-temp-min">${Math.round(
+            <span class="forecast-temp-max">${Math.round(
               forecastDay.temp.max
             )} ºC</span>      
           </li>`;
