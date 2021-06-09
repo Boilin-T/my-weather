@@ -17,15 +17,31 @@ function showWeather(response) {
   );
 
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-  let humidityIcon = document.querySelector("#humidity-icon");
-  let newHumidity = response.data.main.humidity;
-  if (newHumidity <= 50) {
-    humidityIcon.innerHTML = "🌂";
+
+  let umbrellaIcon = document.querySelector("#rain-icon");
+  let umbrella = response.data.weather[0].icon;
+  console.log(umbrella);
+  if (
+    umbrella === "01d" ||
+    umbrella === "01n" ||
+    umbrella === "02d" ||
+    umbrella === "02n" ||
+    umbrella === "13d" ||
+    umbrella === "13n" ||
+    umbrella === "50n" ||
+    umbrella === "50d"
+  ) {
+    umbrellaIcon.innerHTML = "🌂";
   } else {
-    if (newHumidity > 50 && newHumidity < 75) {
-      humidityIcon.innerHTML = "☂️";
+    if (
+      umbrella === "03d" ||
+      umbrella === "03n" ||
+      umbrella === "04n" ||
+      umbrella === "04d"
+    ) {
+      umbrellaIcon.innerHTML = "☂️";
     } else {
-      humidityIcon.innerHTML = "☔";
+      umbrellaIcon.innerHTML = "☔";
     }
   }
 
