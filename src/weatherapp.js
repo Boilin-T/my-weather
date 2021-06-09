@@ -32,6 +32,9 @@ function showWeather(response) {
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
+
+  getForecastHourly(response.data.coord);
+  getForecastDaily(response.data.coord);
 }
 
 function formatDate() {
@@ -71,26 +74,88 @@ function formatTime() {
   return `${hours}:${minutes}`;
 }
 
-function tempFahrenheit(event) {
-  event.preventDefault();
-  let tempC = document.querySelector("#temp");
-  let a = tempC.innerHTML;
-  let tempF = Math.round(a * 1.8 + 32);
-  tempC.innerHTML = `${tempF}`;
-  tempFButton.setAttribute("style", "background-color: lightgray;");
-  let tempCButton = document.querySelector("#celsius");
-  tempCButton.setAttribute("style", "background-color: rgb(113, 157, 194);");
+function getForecastHourly(coordinates) {
+  let apiKey = "7cc7a1eacfc053e2fe7ef8d9cb7298e3";
+  let units = "metric";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayHourly);
 }
 
-function tempCelsius(event) {
-  event.preventDefault();
-  let tempF = document.querySelector("#temp");
-  let a = tempF.innerHTML;
-  let tempC = Math.round((a - 32) / 1.8);
-  tempF.innerHTML = `${tempC}`;
-  tempCButton.setAttribute("style", "background-color: lightgray;");
-  let tempFButton = document.querySelector("#fahrenheit");
-  tempFButton.setAttribute("style", "background-color: rgb(113, 157, 194);");
+function getForecastDaily(coordinates) {
+  let apiKey = "7cc7a1eacfc053e2fe7ef8d9cb7298e3";
+  let units = "metric";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
+  axios.get(apiUrl).then(displayDaily);
+}
+
+function formatHour(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  return `${hours}:00`;
+}
+
+function displayHourly(response) {
+  let hourlyForecast = response.data.hourly;
+  let hourlyElement = document.querySelector("#hour-forecast");
+
+  let hourlyHTML = `<div class="row">`;
+
+  hourlyForecast.forEach(function (hour, index) {
+    if (index < 6) {
+      hourlyHTML =
+        hourlyHTML +
+        `<div class="col-2 text-center">
+      <div class="hourly-temp">${Math.round(hour.temp)} ºC</div>
+      <img src="https://openweathermap.org/img/wn/${
+        hour.weather[0].icon
+      }@2x.png" alt="" class="hourly-forecast-icon">
+      <div class="forecast-hour">${formatHour(hour.dt)}</div>
+    </div>`;
+    }
+  });
+  hourlyHTML = hourlyHTML + `</div>`;
+  hourlyElement.innerHTML = hourlyHTML;
+}
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
+function displayDaily(response) {
+  let dailyForecast = response.data.daily;
+  console.log(dailyForecast);
+  let dailyElement = document.querySelector("#day-forecast");
+
+  let dailyHTML = `<ul class="daily-forecast">`;
+
+  dailyForecast.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      dailyHTML =
+        dailyHTML +
+        `<li class="forecast-line">
+            <span class="forecast-day">${formatDay(forecastDay.dt)}</span>
+            <img src="https://openweathermap.org/img/wn/${
+              forecastDay.weather[0].icon
+            }@2x.png" alt="" class="daily-forecast-icon">
+                  <span class="forecast-temp-max">${Math.round(
+                    forecastDay.temp.min
+                  )} ºC</span>
+            <span>|</span>
+            <span class="forecast-temp-min">${Math.round(
+              forecastDay.temp.max
+            )} ºC</span>      
+          </li>`;
+    }
+  });
+  dailyHTML = dailyHTML + `</ul>`;
+  dailyElement.innerHTML = dailyHTML;
 }
 
 function searchCity(city) {
@@ -99,10 +164,7 @@ function searchCity(city) {
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showWeather);
 }
-// Chooses the city and gets the data from openweather
-// for the selected city using an API with an API key
-// The function chooseCity is called by submitting a city name in the form
-// From the response we can extract the city name and temperature with the function showWeather
+
 function chooseCity(event) {
   event.preventDefault();
   let city = document.querySelector("#city-name").value;
