@@ -1,26 +1,19 @@
 function showWeather(response) {
-  console.log(response);
   document.querySelector("#cityB").innerHTML = response.data.name;
-
   document.querySelector("#description").innerHTML =
     response.data.weather[0].description;
-
   document
     .querySelector("#icon")
     .setAttribute(
       "src",
       `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
     );
-
   document.querySelector("#temp").innerHTML = Math.round(
     response.data.main.temp
   );
-
   document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-
   let umbrellaIcon = document.querySelector("#rain-icon");
   let umbrella = response.data.weather[0].icon;
-  console.log(umbrella);
   if (
     umbrella === "01d" ||
     umbrella === "01n" ||
@@ -44,7 +37,6 @@ function showWeather(response) {
       umbrellaIcon.innerHTML = "☔";
     }
   }
-
   document.querySelector("#wind").innerHTML = Math.round(
     response.data.wind.speed
   );
@@ -73,7 +65,6 @@ function formatDate() {
     "Dec",
   ];
   let month = months[now.getMonth()];
-
   return `${day} ${month} ${date}`;
 }
 
@@ -116,9 +107,7 @@ function formatHour(timestamp) {
 function displayHourly(response) {
   let hourlyForecast = response.data.hourly;
   let hourlyElement = document.querySelector("#hour-forecast");
-
   let hourlyHTML = `<div class="row">`;
-
   hourlyForecast.forEach(function (hour, index) {
     if (index < 6) {
       hourlyHTML =
@@ -140,17 +129,13 @@ function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
   let day = date.getDay();
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-
   return days[day];
 }
 
 function displayDaily(response) {
   let dailyForecast = response.data.daily;
-  console.log(dailyForecast);
   let dailyElement = document.querySelector("#day-forecast");
-
   let dailyHTML = `<ul class="daily-forecast">`;
-
   dailyForecast.forEach(function (forecastDay, index) {
     if (index < 5) {
       dailyHTML =
@@ -188,13 +173,11 @@ function chooseCity(event) {
 }
 
 function getCurrentLocationTemp(position) {
-  console.log(position);
   let units = "metric";
   let apiKey = "7cc7a1eacfc053e2fe7ef8d9cb7298e3";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showWeather);
 }
-
 
 function getLocation(event) {
   navigator.geolocation.getCurrentPosition(getCurrentLocationTemp);
