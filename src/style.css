@@ -84,11 +84,17 @@ h1 {
   top: -50px;
 }
 
-.degree {
+#degree {
   font-size: 30px;
   font-weight: bolder;
   position: relative;
   top: -50px;
+}
+
+.active {
+  color: black;
+  cursor: default;
+  text-decoration: none;
 }
 
 .attributes {
@@ -104,6 +110,11 @@ h1 {
   border-radius: 8px;
 }
 
+.h-degree {
+  position: relative;
+  top: -7px;
+}
+
 .hourly-forecast {
   font-size: 20px;
   font-weight: bolder;
@@ -111,6 +122,11 @@ h1 {
 
 .hourly-forecast-icon {
   height: 50px;
+}
+
+.d-degree {
+  position: relative;
+  top: -9px;
 }
 
 .daily-forecast {

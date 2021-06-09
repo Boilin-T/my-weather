@@ -83,14 +83,14 @@ function formatTime() {
 
 function getForecastHourly(coordinates) {
   let apiKey = "7cc7a1eacfc053e2fe7ef8d9cb7298e3";
-  let units = "metric";
+  let units = selectUnits();
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayHourly);
 }
 
 function getForecastDaily(coordinates) {
   let apiKey = "7cc7a1eacfc053e2fe7ef8d9cb7298e3";
-  let units = "metric";
+  let units = selectUnits();
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(displayDaily);
 }
@@ -113,7 +113,9 @@ function displayHourly(response) {
       hourlyHTML =
         hourlyHTML +
         `<div class="col-2 text-center" id="hourly">
-      <div class="hourly-temp">${Math.round(hour.temp)} ºC</div>
+      <div class="hourly-temp">${Math.round(
+        hour.temp
+      )}<span class="h-degree">º</span></div>
       <img src="https://openweathermap.org/img/wn/${
         hour.weather[0].icon
       }@2x.png" alt="" class="hourly-forecast-icon">
@@ -147,11 +149,13 @@ function displayDaily(response) {
             }@2x.png" alt="" class="daily-forecast-icon">
                   <span class="forecast-temp-min">${Math.round(
                     forecastDay.temp.min
-                  )} ºC</span>
+                  )}</span>
+            <span class="d-degree">º</span> 
             <span>|</span>
             <span class="forecast-temp-max">${Math.round(
               forecastDay.temp.max
-            )} ºC</span>      
+            )}</span> 
+            <span class="d-degree">º</span>      
           </li>`;
     }
   });
@@ -161,7 +165,7 @@ function displayDaily(response) {
 
 function searchCity(city) {
   let apiKey = "7cc7a1eacfc053e2fe7ef8d9cb7298e3";
-  let units = "metric";
+  let units = selectUnits();
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showWeather);
 }
@@ -173,7 +177,7 @@ function chooseCity(event) {
 }
 
 function getCurrentLocationTemp(position) {
-  let units = "metric";
+  let units = selectUnits();
   let apiKey = "7cc7a1eacfc053e2fe7ef8d9cb7298e3";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=${units}`;
   axios.get(apiUrl).then(showWeather);
@@ -181,6 +185,34 @@ function getCurrentLocationTemp(position) {
 
 function getLocation(event) {
   navigator.geolocation.getCurrentPosition(getCurrentLocationTemp);
+}
+
+function displayFahrenheit(event) {
+  event.preventDefault();
+  celsiusTemp.classList.remove("active");
+  fahrenheitTemp.classList.add("active");
+  let cityName = document.querySelector("#cityB");
+  let city = cityName.innerHTML;
+  console.log(city);
+  searchCity(city);
+}
+
+function displayCelsius(event) {
+  event.preventDefault();
+  celsiusTemp.classList.add("active");
+  fahrenheitTemp.classList.remove("active");
+  let cityName = document.querySelector("#cityB");
+  let city = cityName.innerHTML;
+  searchCity(city);
+}
+
+function selectUnits() {
+  let statusTemp = document.getElementsByClassName(`active`);
+  if (statusTemp[0].id === `celsius-temp`) {
+    return "metric";
+  } else {
+    return "imperial";
+  }
 }
 
 let showDate = document.querySelector(".date");
@@ -194,5 +226,11 @@ form.addEventListener("submit", chooseCity);
 
 let currentCity = document.querySelector("#current-city");
 currentCity.addEventListener("click", getLocation);
+
+let fahrenheitTemp = document.querySelector("#fahrenheit-temp");
+fahrenheitTemp.addEventListener("click", displayFahrenheit);
+
+let celsiusTemp = document.querySelector("#celsius-temp");
+celsiusTemp.addEventListener("click", displayCelsius);
 
 searchCity("Leipzig");
