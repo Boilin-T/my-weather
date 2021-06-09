@@ -195,7 +195,7 @@ function getCurrentLocationTemp(position) {
   axios.get(apiUrl).then(showWeather);
 }
 
-// You can google JS location and look for the modzilla link to get this function
+
 function getLocation(event) {
   navigator.geolocation.getCurrentPosition(getCurrentLocationTemp);
 }
