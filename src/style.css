@@ -8,9 +8,18 @@ h1 {
   font-weight: bolder;
 }
 
-.hide {
-  display: none;
+.weather-app {
+  border: 1px solid gray;
+  border-radius: 2%;
+  padding: 15px 20px;
+  margin: 15px;
+  max-width: 80%;
+  background-image: url("clouds.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  box-shadow: 9px 9px 5px black;
 }
+
 #city-name {
   font-size: large;
   text-align: center;
@@ -26,6 +35,10 @@ h1 {
 
 #select-city {
   text-align: right;
+}
+
+.hide {
+  display: none;
 }
 
 #select-city:hover + .hide {
@@ -46,17 +59,6 @@ h1 {
 #current-city:hover {
   background-color: turquoise;
 }
-.weather-app {
-  border: 1px solid gray;
-  border-radius: 2%;
-  padding: 15px 20px;
-  margin: 15px;
-  max-width: 80%;
-  background-image: url("clouds.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  box-shadow: 9px 9px 5px black;
-}
 
 #cityB {
   margin-top: 20px;
@@ -73,15 +75,15 @@ h1 {
   font-weight: bolder;
 }
 
-#temp {
-  font-size: 140px;
-  margin-left: 5px;
-}
-
 #icon {
   margin-left: 20px;
   position: relative;
   top: -50px;
+}
+
+#temp {
+  font-size: 140px;
+  margin-left: 5px;
 }
 
 .degree {
